@@ -2,13 +2,25 @@ from django import forms
 
 from .models import Item 
 
-class NewItemForm(forms.ModelForm):
+INPUT_CLASSES ='w-full py-4 px-6 rounded-xl border'                              
+
+class EditItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ['category', 'name', 'description', 'price', 'image']
-        # widgets = {
-        #     'title': forms.TextInput(attrs={'class': 'form-control'}),
-        #     'description': forms.Textarea(attrs={'class': 'form-control'}),
-        #     'price': forms.NumberInput(attrs={'class': 'form-control'}),
-        #     'image': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
-        # }
+        fields = ['name', 'description', 'price', 'image', 'is_sold']
+        widgets = {
+            
+             'name': forms.TextInput(attrs={
+                 'class':INPUT_CLASSES
+             }),
+             'description': forms.Textarea (attrs={
+                 'class':INPUT_CLASSES
+             }),
+             'price': forms.TextInput(attrs={
+                 'class':INPUT_CLASSES
+             }),
+             'image': forms.FileInput(attrs={
+                 'class':INPUT_CLASSES
+             }),
+
+        }
