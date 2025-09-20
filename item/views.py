@@ -2,8 +2,9 @@ from django.shortcuts import *
 from .models import Item
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
-
 from .forms import *
+
+
 from .models import *
 
 def items( request ):
@@ -64,7 +65,7 @@ def delete(request,pk):
 @login_required
 def new(request):
     if request.method == 'POST':
-       form = NewItemForm(request.POST, request.FILES)
+       form = EditItemForm(request.POST, request.FILES)
 
        if form.is_valid():
           item = form.save(commit=False)
@@ -73,7 +74,7 @@ def new(request):
 
           return redirect('item:detail',pk=item.id)
     else:
-        form = NewItemForm()
+        form = EditItemForm()
 
     return render(request, 'item/form.html', {
         'form' : form,
